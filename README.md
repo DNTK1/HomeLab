@@ -1,6 +1,6 @@
-# Enterprise Infrastructure Lab
+# HomeLab
 
-To home lab zbudowany do nauki administracji Windows i Linux, wirtualizacji, sieci, automatyzacji oraz CI/CD. Całość działa na klastrze Proxmox VE z Ceph.
+To lab zbudowany do nauki administracji Windows i Linux, wirtualizacji, sieci, automatyzacji oraz CI/CD. Całość działa na klastrze Proxmox VE z Ceph.
 
 Repozytorium zawiera opis środowiska, używane playbooki Ansible, skrypty bash oraz testową aplikację z pipelineem Jenkinsa.
 
@@ -118,13 +118,8 @@ Dokładniejszy opis jest w
 
 
 
-# 29.08.2026 Co dalej
+# 20.10.2026 Co dalej
 
 ## Aktualnie:
 
-- Przygotowuję się do certyfikatu RHCSA EX200 (Red Hat Certified System Administrator)
-
-## W przyszłości:
-
-- Do poprawy VLANy wraz z docelowym podziałem sieci na Management, VM i Ceph - wymaga zmiany adresacji wielu maszyn
-- W dalszej przyszłości planuję dodać projekt w architekturze hybrydowej Azure + on-prem, np. skracacz linków z frontendem i publiczną bramą w Azure oraz backendem z PostgreSQL działającym na K3s/K8s i korzystającym z Ceph CSI. Połączenie między chmurą a labem będzie realizowane przez Tailscale, a infrastruktura Azure zarządzana za pomocą Terraforma
+- Przygotowuję się do certyfikatów Microsoft Azure AZ-104 oraz RHCSA EX200 (Red Hat Certified System Administrator)
