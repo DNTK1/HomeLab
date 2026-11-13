@@ -14,11 +14,3 @@ Projekt ma na celu naukę i eksperymentowanie/troubleshooting w środowisku zbli
 | Samba                        | Udział plików i obrazy instalacyjne                                            |
 | Proxmox Backup Server        | Kopie zapasowe VM                                                              |
 | Ansible                      | Zarządzanie hostami Linux i wdrożenie Kubernetes                               |
-
-## Dokumentacja
-
-| Katalog | Zawartość |
-|---|---|
-| [infra](infra/README.md) | Sprzęt, Proxmox, dyski i sieć |
-| [services](services/README.md) | Usługi Windows, Linux i Kubernetes |
-| [ansible](ansible/README.md) | Zarządzanie hostami Linux i Kubespray |
