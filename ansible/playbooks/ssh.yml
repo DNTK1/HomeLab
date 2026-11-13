@@ -1,0 +1,73 @@
+---
+- name: SSH setup
+  hosts: k8s
+  gather_facts: false
+  become: true
+  serial: 6
+  any_errors_fatal: true
+
+  vars:
+    key_file: "{{ lookup('ansible.builtin.env', 'HOME') }}/.ssh/ansible-homelab"
+
+  tasks:
+    - name: Create group
+      ansible.builtin.group:
+        name: ansible
+
+    - name: Create user
+      ansible.builtin.user:
+        name: ansible
+        group: ansible
+        shell: /bin/bash
+        create_home: true
+        password_lock: true
+
+    - name: Create .ssh
+      ansible.builtin.file:
+        path: /home/ansible/.ssh
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: '0700'
+
+    - name: Set authorized_keys
+      ansible.builtin.copy:
+        dest: /home/ansible/.ssh/authorized_keys
+        owner: ansible
+        group: ansible
+        mode: '0600'
+        content: |
+          from="{{ automation_source_ip }}",restrict {{ lookup('ansible.builtin.file', key_file ~ '.pub') }}
+
+    - name: Restore SELinux labels
+      ansible.builtin.command: restorecon -R /home/ansible/.ssh
+      changed_when: false
+
+    - name: Test SSH
+      delegate_to: localhost
+      become: false
+      ansible.builtin.command:
+        argv:
+          - ssh
+          - -T
+          - -S
+          - none
+          - -oBatchMode=yes
+          - -oIdentitiesOnly=yes
+          - -oPreferredAuthentications=publickey
+          - -oConnectTimeout=5
+          - -i
+          - "{{ key_file }}"
+          - "ansible@{{ inventory_hostname }}"
+          - "true"
+      changed_when: false
+      
+    - name: Add sudo rule
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/ansible
+        owner: root
+        group: root
+        mode: '0440'
+        content: |
+          ansible ALL=(root) NOPASSWD: ALL
+        validate: /usr/sbin/visudo -cf %s
