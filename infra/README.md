@@ -30,10 +30,11 @@ OPNsense obsługuje dostęp do Internetu i ruch między VLAN-ami.
 | VLAN          | Zastosowanie                    |
 | ------------- | ------------------------------- |
 | 10_MGMT       | Zarządzanie hostami i switchami |
+| 12_COROSYNC   | Komunikacja klastra Proxmox     |
 | 20_SERVERS    | VM Windows i Linux              |
 | 30_ADMIN      | Komputer administracyjny        |
 | 40_BACKUP     | Ruch do PBS                     |
-| 50_K8S        | Hosty Lenovo                    |
+| 50_K8S        | Klaster Kubernetes                    |
 | 60_CLIENTS    | Komputery testowe               |
 | 70_AUTOMATION | Ansible                         |
 
